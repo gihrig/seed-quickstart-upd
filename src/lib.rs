@@ -1,29 +1,15 @@
 use seed::{prelude::*, *};
 
-// mod Home {
-//     fn view() -> Vec<Node<Msg>> {
-//         raw!(
-//             <button class="ml-4 mt-4 bg-green-500 text-white p-2 rounded text-2xl font-bold">+</button>
-//             <button class="ml-4 mt-4 bg-red-500 text-white p-2 rounded text-2xl font-bold">-</button>
-//             <span class="ml-4 mt-4 bg-blue-500 text-white p-2 rounded text-2xl font-bold">0</span>
-//         )
-//     }
-// }
-
 struct Model {
     pub val: i32,
-    pub html_str: &'static str,
+    pub html: &'static str,
 }
 
 impl Default for Model {
     fn default() -> Self {
         Self {
             val: 0,
-            html_str: r###"
-    <button class="ml-4 mt-4 bg-green-500 text-white p-2 rounded text-2xl font-bold">+</button>
-    <button class="ml-4 mt-4 bg-red-500 text-white p-2 rounded text-2xl font-bold">-</button>
-    <span class="ml-4 mt-4 bg-blue-500 text-white p-2 rounded text-2xl font-bold">0</span>
-    "###,
+            html: include_str!("./components/counter.html"),
         }
     }
 }
@@ -42,7 +28,7 @@ fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
 }
 
 fn view(model: &Model) -> impl View<Msg> {
-    raw!(model.html_str)
+    raw!(&model.html)
     // nodes![
     //     button![
     //         class!("ml-4 mt-4 bg-green-500 text-white p-2 rounded text-2xl font-bold"),
