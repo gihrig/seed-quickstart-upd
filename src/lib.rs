@@ -39,6 +39,7 @@ enum Msg {
     Decrement,
 }
 
+// `update` describes how to handle each `Msg`.
 fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
     match msg {
         Msg::Increment => model.val += 1,
@@ -111,7 +112,9 @@ fn update_virtual_dom_node(id: &str, nodes: &mut [Node<Msg>], updater: &dyn Fn(&
 // ------ ------
 
 #[wasm_bindgen(start)]
+// Invoked by `init` function in `index.html`
 pub fn start() {
-    // "app" is id of the root / mount element. It can be also `web_sys::Node` or another supported type.
+    // "app" = root / mount element id.
+    // It can be also `web_sys::Node` or another supported type.
     App::start("app", init, update, view);
 }
